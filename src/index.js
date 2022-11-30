@@ -1,26 +1,22 @@
-import { Observable } from "rxjs";
+import { fromEvent } from "rxjs";
 
-const observableAlpha$ = new Observable((subcriber) => {
-  subcriber.next("Alpha");
-//   a=b;
-  subcriber.next("Beta");
-  subcriber.complete();
-  subcriber.next("Gamma");
-  subcriber.next("Delta");
-  subcriber.complete();
-});
+const onMouseMove$ = fromEvent(document, "mousemove");
 
-const observador = {
-  next: (value) => {
-    console.log(value);
-  },
-  complete: () => {
-    console.log("Complete");
-  },
-  error: (e) => {
-    console.log('Error: ');
-    // console.error(e);
+const observerMouse = {
+  next: (event) => {
+    // console.log(event);
+    console.log(event.clientX);
   },
 };
 
-observableAlpha$.subscribe(observador);
+onMouseMove$.subscribe(observerMouse);
+
+const onKeyDown$ = fromEvent(document, "keydown");
+
+const observerKey = {
+  next: (event) => {
+    console.log(event.key);
+  },
+};
+
+onKeyDown$.subscribe(observerKey);
