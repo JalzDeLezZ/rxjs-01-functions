@@ -7,7 +7,6 @@ const observableAlpha$ = new Observable((subcriber) => {
   subcriber.complete();
   subcriber.next("Gamma");
   subcriber.next("Delta");
-  subcriber.complete();
 });
 
 const observador = {
@@ -22,5 +21,5 @@ const observador = {
     // console.error(e);
   },
 };
-
+d
 observableAlpha$.subscribe(observador);

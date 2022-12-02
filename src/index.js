@@ -1,4 +1,4 @@
-import { fromEvent } from "rxjs";
+import { fromEvent } from "rxjs"; // fromEvent :: Get an observable from an event of the DOM (click, keyup, etc)
 
 const onMouseMove$ = fromEvent(document, "mousemove");
 
