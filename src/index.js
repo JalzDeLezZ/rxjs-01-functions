@@ -1,22 +1,35 @@
-import { fromEvent } from "rxjs"; // fromEvent :: Get an observable from an event of the DOM (click, keyup, etc)
+import { Observable, Subject } from "rxjs";
 
-const onMouseMove$ = fromEvent(document, "mousemove");
 
-const observerMouse = {
-  next: (event) => {
-    // console.log(event);
-    console.log(event.clientX);
-  },
-};
+const observable1 = {
+  next: (value) => {
+    console.log(value);
+  }
+}
 
-onMouseMove$.subscribe(observerMouse);
+const observable2 = {
+  next: (value) => {
+    console.log(value);
+  }
+}
 
-const onKeyDown$ = fromEvent(document, "keydown");
+// %%%%%%%%%%%%%%%%%% Observable %%%%%%%%%%%%%%%%%% 
+const number$ = new Observable((subscriber) => {
+  subscriber.next(Math.round(Math.random()*100));
+});
+number$.subscribe(observable1);
+number$.subscribe(observable2);
 
-const observerKey = {
-  next: (event) => {
-    console.log(event.key);
-  },
-};
 
-onKeyDown$.subscribe(observerKey);
+// %%%%%%%%%%%%%%%%%% Subject %%%%%%%%%%%%%%%%%% 1
+const numberRandom$ = new Subject();
+numberRandom$.subscribe(observable1);
+numberRandom$.subscribe(observable2);
+
+// %%%%%%%%%%%%%%%%%% Subject.next %%%%%%%%%%%%%%%%%% 1.1
+numberRandom$.next(Math.round(Math.random()*100));
+numberRandom$.next(111111);
+
+// %%%%%%%%%%%%%%%%%% Anidation %%%%%%%%%%%%%%%%%% 1.2
+number$.subscribe(numberRandom$);
+
