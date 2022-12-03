@@ -1,14 +1,8 @@
-import { from, of, asyncScheduler } from 'rxjs'
+import { interval, timer } from "rxjs"; // It is used to handle errors, but in case we want to try it one more time
 
-const fruits$ = from(['apple', 'tangerine', 'pear', 'banana']);
+// const secuenceNumbers$ = interval(1000);
+// secuenceNumbers$.subscribe(console.log);
 
-fruits$.subscribe(console.log);
 
-const numbers$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-numbers$.subscribe(console.log);
-
-// test asyncScheduler
-
-const alphabet$ = from(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'], asyncScheduler);
-alphabet$.subscribe(console.log);
+const delayedTimer$ = timer(2000);
+delayedTimer$.subscribe(console.log);
