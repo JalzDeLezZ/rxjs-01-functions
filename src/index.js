@@ -1,35 +1,14 @@
-import { Observable, Subject } from "rxjs";
+import { from, of, asyncScheduler } from 'rxjs'
 
+const fruits$ = from(['apple', 'tangerine', 'pear', 'banana']);
 
-const observable1 = {
-  next: (value) => {
-    console.log(value);
-  }
-}
+fruits$.subscribe(console.log);
 
-const observable2 = {
-  next: (value) => {
-    console.log(value);
-  }
-}
+const numbers$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-// %%%%%%%%%%%%%%%%%% Observable %%%%%%%%%%%%%%%%%% 
-const number$ = new Observable((subscriber) => {
-  subscriber.next(Math.round(Math.random()*100));
-});
-number$.subscribe(observable1);
-number$.subscribe(observable2);
+numbers$.subscribe(console.log);
 
+// test asyncScheduler
 
-// %%%%%%%%%%%%%%%%%% Subject %%%%%%%%%%%%%%%%%% 1
-const numberRandom$ = new Subject();
-numberRandom$.subscribe(observable1);
-numberRandom$.subscribe(observable2);
-
-// %%%%%%%%%%%%%%%%%% Subject.next %%%%%%%%%%%%%%%%%% 1.1
-numberRandom$.next(Math.round(Math.random()*100));
-numberRandom$.next(111111);
-
-// %%%%%%%%%%%%%%%%%% Anidation %%%%%%%%%%%%%%%%%% 1.2
-number$.subscribe(numberRandom$);
-
+const alphabet$ = from(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'], asyncScheduler);
+alphabet$.subscribe(console.log);
